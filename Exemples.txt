@@ -1,15 +1,14 @@
 "ScrapExemple1":
 {
+  
   "siteUrl": "https://www.scrapingcourse.com/ecommerce/page/2/",
   "selectors": [
-    "//h2[@class='product-name woocommerce-loop-product__title']",
+   "//h2[@class='product-name woocommerce-loop-product__title']",
     "//span[@class='price']/span[@class='product-price woocommerce-Price-amount amount']/bdi"
-    
   ],
-  "selectorsType": "XPath",
-  "data": [
-    "string"
-  ]
+  "selectorsType": "XPath"
+
+  
 },
 
 "ScrapExemple2":
@@ -17,13 +16,9 @@
   "siteUrl": "https://samara.hh.ru/search/vacancy?area=78&hhtmFrom=main&hhtmFromLabel=vacancy_search_line&part_time=from_four_to_six_hours_in_a_day&search_field=name&search_field=company_name&search_field=description&enable_snippets=false&education=higher&text=&only_with_salary=true",
   "selectors": [
     "//div[@class='vacancy-info--umZA61PpMY07JVJtomBA']/h2/span/a/span/span",
-    "//div[@class='vacancy-info--umZA61PpMY07JVJtomBA']/div[@class='wide-container-magritte--TW4VNlBZBlbEJTz27Isa']/div/span",
-    ""
-    
+    "//div[@class='vacancy-info--umZA61PpMY07JVJtomBA']/div[@class='wide-container-magritte--TW4VNlBZBlbEJTz27Isa']/div/span"
     
   ],
-  "selectorsType": "XPath",
-  "data": [
-    "string"
-  ]
+  "selectorsType": "XPath"
+  
 }

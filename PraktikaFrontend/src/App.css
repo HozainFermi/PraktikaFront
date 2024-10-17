@@ -5,9 +5,14 @@
   flex-direction: row;
   gap: 2em;
   align-items: center;
+  padding-left: 20%;
+  
   
 }
 
-
-
-
+.table{
+  margin-top: 8%;
+  background-color: rgb(47, 64, 94);
+  color: white;
+  height: 100vh;
+}

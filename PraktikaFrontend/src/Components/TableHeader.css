@@ -1,0 +1,16 @@
+.head-of-clolumn{
+
+    display: flex;
+    flex-direction: column;
+    
+  }
+  
+  .input-title{
+    color: white;
+  }
+  
+  .textarea-for-selector{
+    color: white;
+    width: 100%;
+    box-sizing: border-box;
+  }

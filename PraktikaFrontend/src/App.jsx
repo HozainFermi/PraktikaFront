@@ -1,78 +1,77 @@
 
+import { useRef, useState } from 'react'
 import './App.css'
-import { Button, Input, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper, Select, Stack, Table, TableCaption, TableContainer, Tbody, Td, Textarea, Th, Thead, Tr } from '@chakra-ui/react'
+import { Button, flexbox, Input, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper, Select, Stack, Table, TableCaption, TableContainer, Tbody, Td, Textarea, Th, Thead, Tr } from '@chakra-ui/react'
+import { px } from 'framer-motion'
+
+import TypeofselectorComponent from './Components/TypeofselectorComponent'
+import TableHeadComponent from './Components/TableHeadComponent'
+import SubmitBtnComponent from './Components/SubmitBtnComponent'
 
 
 
 
+function App() { 
+  
+  const [numofcols,setCols] = useState(1); 
+  const [selectorstype,setSelectorsType] = useState('XPath');
+  const [selectors,setSelectors] = useState([])
+  const [url, setUrl] = useState('');
 
-function App() {  
+  const textareaRefs = useRef([]);
+  const urlinputRef =useRef(null);
 
- 
+  const [parsoutput,setOutput] = useState([])
+
+  const handleClick = () => {
+    const textareaContents = textareaRefs.current.map((ref) => ref.value);
+    setSelectors(textareaContents)
+    //console.log(JSON.stringify(textareaContents, null, 2));
+    return selectors
+  };
+
+  const handlUrlInput = ()=>{
+    var uri = urlinputRef.current.value
+    setUrl(uri)
+    //return url
+  }
+
+
   return (
     <section className='main-section'>
-      <header className='header' align='center'>
+      <header className='header' align='center' >
       
-      <Stack rowGap={1} direction={'column'} >
-      <p size='sm' id='text-selctortype'>Тип селекторов</p>
-        <Select size='sm'>
-          <option value='XPath' >XPath</option>
-          <option value='CSSselector' >CSSselectors</option>
-        </Select>
-        </Stack>
+      <TypeofselectorComponent onSetType={setSelectorsType}/>
 
-        <Stack className='cols-input' rowGap={1} direction={'column'} >
+    <Stack>
+      <p>Введите количество стобцов</p>
+      <NumberInput defaultValue={1} min={0} max={10}>
+        <NumberInputField />
+        <NumberInputStepper>
+        <NumberIncrementStepper onClick={()=>setCols(numofcols+1)} />
+        <NumberDecrementStepper onClick={()=>setCols(numofcols-1)}/>
+        </NumberInputStepper>
+      </NumberInput>
+      </Stack>
 
-        <p>Количество столбцов</p>
-        <NumberInput id='num-cols-input'         
-        
-        size='sm'
-        >
-          <NumberInputField />
-          <NumberInputStepper>
-            <NumberIncrementStepper />
-              <NumberDecrementStepper />
-              </NumberInputStepper>
-          </NumberInput>
+          <Input id='urlinput' placeholder='Введите Url' size='sm' maxW={'2xl'} mt={6} ref={urlinputRef} />
+          
 
-          </Stack>
+          <Stack direction='row' spacing={1} align='center' className='sidebtns' mt={6}>
 
-          <Input placeholder='Введите Url' size='sm' maxW={'2xl'} />
-
-          <Stack direction='row' spacing={1} align='center' className='sidebtns' >
-            <Button colorScheme='blue' size={'md'} >Submit</Button>
+            <SubmitBtnComponent siteUrl={url} handlUrlInput={handlUrlInput} handleClick={handleClick} onStringsUpdate={setOutput} selectorsType={selectorstype}  />
+            {/* <Button colorScheme='blue' size={'md'}  >Submit</Button> */}
             <Button colorScheme='blue' size={'md'}>Extract</Button>
           </Stack>
-
       </header>
 
-     
-      <TableContainer>
-  <Table variant='simple'>
+
+      <TableContainer className='table'>
+  <Table variant='simple' colorScheme='#ffff'>
     
-    <Thead>
-      <Tr>
-        <Th><Textarea maxHeight={'0.5'} maxW={'2.5'}></Textarea></Th>
-        <Th><Textarea maxHeight={'0.5'} maxW={'2.5'}></Textarea></Th>
-        <Th><Textarea maxHeight={'0.5'} maxW={'2.5'}></Textarea></Th>
-      </Tr>
-    </Thead>
+    <TableHeadComponent cols={numofcols} textareaRefs={textareaRefs} />
     <Tbody>
-      <Tr>
-        <Td>inches</Td>
-        <Td>millimetres (mm)</Td>
-        <Td isNumeric>25.4</Td>
-      </Tr>
-      <Tr>
-        <Td>feet</Td>
-        <Td>centimetres (cm)</Td>
-        <Td isNumeric>30.48</Td>
-      </Tr>
-      <Tr>
-        <Td>yards</Td>
-        <Td>metres (m)</Td>
-        <Td isNumeric>0.91444</Td>
-      </Tr>
+      {}
     </Tbody>
   </Table>
 </TableContainer>
@@ -82,4 +81,4 @@ function App() {
   )
 }
 
-export default App
+export default App;
