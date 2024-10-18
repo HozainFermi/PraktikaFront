@@ -1,0 +1,42 @@
+
+@property --angle{
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+}
+
+#submitBtn{
+    width: 81.66px;
+    background-image: linear-gradient(to left, rgb(40, 143, 184),rgb(53, 104, 197));
+    position: relative;
+    z-index: 0;
+    cursor: pointer;
+    border-radius: 6px;
+    color: white;
+}
+
+#submitBtn::after {
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 0px;
+    background-image: linear-gradient(to left, #0af5e1, #2b93a5);
+    top: 0;
+    left: 0;
+    
+    z-index: -1;
+  
+    border-radius: 6px;
+    transition: 150ms ease-in-out;
+
+}
+
+#submitBtn:hover::after{
+    width: 100%;
+}
+
+#submitBtn:hover{
+    color: black;
+}
+
+

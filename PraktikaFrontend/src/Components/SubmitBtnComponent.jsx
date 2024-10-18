@@ -1,8 +1,9 @@
 import { Button } from "@chakra-ui/react";
 import { useRef } from "react";
+import './SubmitBtn.css'
 
 
-const SubmitBtnComponent = ({siteUrl,handleClick,handlUrlInput,selectorsType,onStringsUpdate })=> {
+const SubmitBtnComponent = ({onChangeInfo,siteUrl,handleClick,handlUrlInput,selectorsType,onStringsUpdate })=> {
     
     
 
@@ -10,6 +11,7 @@ const SubmitBtnComponent = ({siteUrl,handleClick,handlUrlInput,selectorsType,onS
 
    
     var selectorsarray  = handleClick();
+
     handlUrlInput()
     
 
@@ -38,6 +40,7 @@ const SubmitBtnComponent = ({siteUrl,handleClick,handlUrlInput,selectorsType,onS
             const data = await response.json();
             console.log(data);
             onStringsUpdate(data)
+            onChangeInfo();
             return data
            
     
@@ -47,7 +50,7 @@ const SubmitBtnComponent = ({siteUrl,handleClick,handlUrlInput,selectorsType,onS
         } catch (error) {
           console.error('Ошибка при выполнении запроса:', error);
         }
-    
+        
       };
       handleSubmit();
 
@@ -58,7 +61,7 @@ const SubmitBtnComponent = ({siteUrl,handleClick,handlUrlInput,selectorsType,onS
     // }
 
     return(
-        <Button colorScheme='blue' size={'md'} onClick={doOnBtnClicl} >Submit</Button>
+        <button id="submitBtn" onClick={doOnBtnClicl} >Parse</button>
     );
 }
 export default SubmitBtnComponent;

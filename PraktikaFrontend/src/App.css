@@ -7,12 +7,42 @@
   align-items: center;
   padding-left: 20%;
   
+
   
 }
 
 .table{
-  margin-top: 8%;
+ 
   background-color: rgb(47, 64, 94);
   color: white;
   height: 100vh;
 }
+
+.sidebtns{
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+
+}
+
+.InfoText{
+ display: flex;
+ flex-direction: row;
+ align-content: center;
+ justify-content: center;
+ background: #2f405e;
+ color: white;
+
+ top: 0;
+ 
+
+}
+
+.middlecontent{
+  width: 100vw;
+  
+
+}
+
+
+

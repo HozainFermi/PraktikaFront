@@ -1,13 +1,22 @@
 
 import { useRef, useState } from 'react'
 import './App.css'
-import { Button, flexbox, Input, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper, Select, Stack, Table, TableCaption, TableContainer, Tbody, Td, Textarea, Th, Thead, Tr } from '@chakra-ui/react'
+import { Button, Divider, flexbox, Input, Menu, MenuButton, MenuItem, MenuList, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper, Select, Stack, Table, TableCaption, TableContainer, Tbody, Td, Text, Textarea, Th, Thead, Tr } from '@chakra-ui/react'
 import { px } from 'framer-motion'
 
 import TypeofselectorComponent from './Components/TypeofselectorComponent'
 import TableHeadComponent from './Components/TableHeadComponent'
 import SubmitBtnComponent from './Components/SubmitBtnComponent'
+import TableBodyComponent from './Components/TableBodyComponent'
 
+
+function countBytes(arr) {
+  let totalBytes = 0;
+  for (let i = 0; i < arr.length; i++) {
+    totalBytes += new Blob([arr[i]]).size;
+  }
+  return totalBytes;
+}
 
 
 
@@ -19,6 +28,7 @@ function App() {
   const [url, setUrl] = useState('');
 
   const textareaRefs = useRef([]);
+  const infoRef = useRef(null);
   const urlinputRef =useRef(null);
 
   const [parsoutput,setOutput] = useState([])
@@ -36,10 +46,22 @@ function App() {
     //return url
   }
 
+  const handletextareainput = (selector)=>{
+    setSelectors([...selectors, selector]);
+  }
+
+  const changeInfo = ()=>{
+    let numofbytes = countBytes(parsoutput)
+    let len = parsoutput.length
+    let str = `Number of lines:${len} Number of bytes:${numofbytes}`
+    infoRef.current.value = str
+    console.log(`Number of lines:${parsoutput.length}\nNumber of bytes:${numofbytes}`)
+  }
+
 
   return (
     <section className='main-section'>
-      <header className='header' align='center' >
+      <header className='header' align='center'>
       
       <TypeofselectorComponent onSetType={setSelectorsType}/>
 
@@ -56,23 +78,40 @@ function App() {
 
           <Input id='urlinput' placeholder='Введите Url' size='sm' maxW={'2xl'} mt={6} ref={urlinputRef} />
           
+          
+          <div align='center' className='sidebtns'>
 
-          <Stack direction='row' spacing={1} align='center' className='sidebtns' mt={6}>
-
-            <SubmitBtnComponent siteUrl={url} handlUrlInput={handlUrlInput} handleClick={handleClick} onStringsUpdate={setOutput} selectorsType={selectorstype}  />
+            <SubmitBtnComponent onChangeInfo={changeInfo} siteUrl={url} handlUrlInput={handlUrlInput} handleClick={handleClick} onStringsUpdate={setOutput} selectorsType={selectorstype}  />
             {/* <Button colorScheme='blue' size={'md'}  >Submit</Button> */}
-            <Button colorScheme='blue' size={'md'}>Extract</Button>
-          </Stack>
+            <Menu>
+  <MenuButton as={Button} colorScheme='blue' >
+    Actions
+  </MenuButton>
+  <MenuList>
+    <MenuItem>Download as CSV</MenuItem>
+    <MenuItem>We're working on it</MenuItem>
+    <MenuItem>We're working on it</MenuItem>
+    
+    
+  </MenuList>
+</Menu>
+          </div>
       </header>
 
+      <div className='middlecontent' >
+      <Divider orientation='horizontal' pt={3} colorScheme='blue' mb={20} ></Divider>
+      <Text className='InfoText' ref={infoRef} >Info:</Text>
+      </div>
 
-      <TableContainer className='table'>
+      
+
+      <TableContainer className='table' overflowY={'auto'} >
   <Table variant='simple' colorScheme='#ffff'>
     
-    <TableHeadComponent cols={numofcols} textareaRefs={textareaRefs} />
-    <Tbody>
-      {}
-    </Tbody>
+    <TableHeadComponent cols={numofcols} textareaRefs={textareaRefs}  />
+    
+      <TableBodyComponent strings={parsoutput} />
+    
   </Table>
 </TableContainer>
 
@@ -82,3 +121,5 @@ function App() {
 }
 
 export default App;
+
+

@@ -15,8 +15,8 @@ const TableHeadComponent = ({cols,textareaRefs}) => {
       row.push(
       <Th>
         <div className='head-of-clolumn'>
-        <Input className='input-title'></Input>
-        <Textarea className='textarea-for-selector' ref={(ref) => (textareaRefs.current[i] = ref)} ></Textarea>
+        <Input className='input-title' placeholder='Название столбца' ></Input>
+        <Textarea className='textarea-for-selector' placeholder='Введите селектор' ref={(ref) => (textareaRefs.current[i] = ref)}  ></Textarea>
         </div>
         </Th>
         )
