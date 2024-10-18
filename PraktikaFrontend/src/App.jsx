@@ -99,7 +99,7 @@ function App() {
       </header>
 
       <div className='middlecontent' >
-      <Divider orientation='horizontal' pt={3} colorScheme='blue' mb={20} ></Divider>
+      <Divider className='divider' orientation='horizontal' pt={3} colorScheme='teal'  mb={20} mt={3} ></Divider>
       <Text className='InfoText' ref={infoRef} >Info:</Text>
       </div>
 
