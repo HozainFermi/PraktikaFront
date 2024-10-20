@@ -45,6 +45,10 @@ function App() {
     });
   };
 
+  const onUrlChange = (value)=>{
+
+    setUrl(value)
+  }
   
   const handlUrlInput = ()=>{
     var uri = urlinputRef.current.value
@@ -88,12 +92,12 @@ function App() {
       </NumberInput>
       </Stack>
 
-          <Input id='urlinput' placeholder='Введите Url' size='sm' maxW={'2xl'} mt={6} ref={urlinputRef} />
+          <Input id='urlinput' placeholder='Введите Url' size='sm' maxW={'2xl'} mt={6} ref={urlinputRef} onBlur={(event)=>onUrlChange(event.target.value)} />
           
           
           <div align='center' className='sidebtns'>
 
-            <SubmitBtnComponent siteUrl={url} handlUrlInput={handlUrlInput} selectors={selectors} onStringsUpdate={setOutput} selectorsType={selectorstype}  />
+            <SubmitBtnComponent siteUrl={url} selectors={selectors} onStringsUpdate={setOutput} selectorsType={selectorstype}  />
             {/* <Button colorScheme='blue' size={'md'}  >Submit</Button> */}
             <Menu>
   <MenuButton as={Button} colorScheme='blue'>

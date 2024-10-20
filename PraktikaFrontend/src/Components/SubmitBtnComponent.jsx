@@ -6,7 +6,7 @@ import './SubmitBtn.css'
 
 
 
-const SubmitBtnComponent = ({siteUrl,selectors,handlUrlInput,selectorsType,onStringsUpdate })=> {
+const SubmitBtnComponent = ({siteUrl,selectors,selectorsType,onStringsUpdate })=> {
     
     const [showAlert,setShowAlert] = useState(false)
 
@@ -15,7 +15,7 @@ const SubmitBtnComponent = ({siteUrl,selectors,handlUrlInput,selectorsType,onStr
       setShowAlert(true);
     setTimeout(() => {
       setShowAlert(false);
-    }, 15000); // Скрывать Alert через 3 секунды
+    }, 6000); // Скрывать Alert через 3 секунды
       
     }
 
@@ -26,7 +26,7 @@ const SubmitBtnComponent = ({siteUrl,selectors,handlUrlInput,selectorsType,onStr
    
     //var selectorsarray  = selectors;
 
-    handlUrlInput()
+    
     
 
     console.log(selectors);
