@@ -1,21 +1,35 @@
-import { Button } from "@chakra-ui/react";
-import { useRef } from "react";
+import { Alert, AlertDescription, AlertIcon, AlertTitle, Button } from "@chakra-ui/react";
+import { useRef, useState } from "react";
 import './SubmitBtn.css'
 
 
-const SubmitBtnComponent = ({onChangeInfo,siteUrl,handleClick,handlUrlInput,selectorsType,onStringsUpdate })=> {
+
+
+
+const SubmitBtnComponent = ({siteUrl,selectors,handlUrlInput,selectorsType,onStringsUpdate })=> {
     
-    
+    const [showAlert,setShowAlert] = useState(false)
+
+    const handleShowAlert =()=>{
+
+      setShowAlert(true);
+    setTimeout(() => {
+      setShowAlert(false);
+    }, 15000); // Скрывать Alert через 3 секунды
+      
+    }
+
+
 
   const doOnBtnClicl = ()=>{
 
    
-    var selectorsarray  = handleClick();
+    //var selectorsarray  = selectors;
 
     handlUrlInput()
     
 
-    console.log(selectorsarray);
+    console.log(selectors);
     console.log(siteUrl);
     console.log(selectorsType);
 
@@ -31,72 +45,51 @@ const SubmitBtnComponent = ({onChangeInfo,siteUrl,handleClick,handlUrlInput,sele
             },
             body: JSON.stringify({
                 siteUrl: siteUrl,
-                selectors: selectorsarray,
+                selectors: selectors,
                 selectorsType: selectorsType
               })
           });
     
           if (response.ok) {
             const data = await response.json();
-            console.log(data);
+            //console.log(data);
             onStringsUpdate(data)
-            onChangeInfo();
+            //onChangeInfo();
+            handleShowAlert()
+            
             return data
            
     
           } else {
             console.error('Ошибка запроса:', response.status);
+            //setShowAlert(false);
+            
           }
         } catch (error) {
           console.error('Ошибка при выполнении запроса:', error);
+          //setShowAlert(false)
+          
         }
         
       };
       handleSubmit();
 
   }
-    // const handleClick = () => {
-    //     var newstrings= handleSubmit();
-    //     onStringsUpdate(newstrings)
-    // }
-
-    return(
+  
+  
+    return(         
+      <div className="submitbtnWrapper">
         <button id="submitBtn" onClick={doOnBtnClicl} >Parse</button>
+        {showAlert && (
+          <Alert className="Alert" status="success" position="fixed" transition={'normal'} zIndex={10} >
+            <AlertIcon />
+            <AlertTitle>Success!</AlertTitle>
+            <AlertDescription>Ваше действие выполнено успешно.</AlertDescription>
+          </Alert>
+        )}
+        </div>
     );
 }
 export default SubmitBtnComponent;
 
-// const handleSubmit = async (event) => {
-//     event.preventDefault();
-    
-//     try {
-//       const response = await fetch('http://localhost:5161/ParsTask', {
-//         method: 'POST',
-//         headers: {
-//           'Content-Type': 'application/json',
-//           'accept': '*/*'
-//         },
-//         body: JSON.stringify({
-//             "siteUrl": "https://www.scrapingcourse.com/ecommerce/page/2/",
-//               "selectors": [
-//                "//h2[@class='product-name woocommerce-loop-product__title']",
-//                 "//span[@class='price']/span[@class='product-price woocommerce-Price-amount amount']/bdi"
-//               ],
-//               "selectorsType": "XPath"
-//             })
-//       });
 
-//       if (response.ok) {
-//         const data = await response.json();
-//         console.log(data);
-//         return data
-       
-
-//       } else {
-//         console.error('Ошибка запроса:', response.status);
-//       }
-//     } catch (error) {
-//       console.error('Ошибка при выполнении запроса:', error);
-//     }
-
-//   };

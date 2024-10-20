@@ -10,7 +10,7 @@ const TableBodyComponent = ({strings})=>{
 
         for (let indexofrow = 0; indexofrow < strings.length; indexofrow++) {
             Tds=[];
-            columncells=strings[indexofrow].trim().split(' , ');
+            columncells=strings[indexofrow].trim().split(', ');
 
             for (let indexofcolumn = 0; indexofcolumn < columncells.length; indexofcolumn++) {
                 Tds.push(<Td>{columncells[indexofcolumn]}</Td>)
