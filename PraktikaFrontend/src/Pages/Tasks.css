@@ -1,0 +1,24 @@
+.all{
+
+    
+}
+
+.sidemenu {
+    height: 100vh;
+    width: fit-content;
+    padding-top: 15%;
+    box-shadow: 5px 0px 5px;
+    background-color: #576F98;
+}
+
+.tasks-viewer {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    gap: 5%;
+    left: 24%;
+    bottom: 1%;
+    overflow-y: auto;
+    height: 83%;
+    width: 75%;
+}
